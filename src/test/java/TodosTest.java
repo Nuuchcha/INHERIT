@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class TodosTest {
-    SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
+    SimpleTask simpleTask = new SimpleTask(5, "Предложить версии решений");
 
     String[] subtasks = { "Молоко", "Яйца", "Хлеб" };
     Epic epic = new Epic(55, subtasks);
@@ -18,19 +18,19 @@ public class TodosTest {
 
     @Test
     public void shouldAddThreeTasksOfDifferentType() {
-        /*    SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
-
-        String[] subtasks = { "Молоко", "Яйца", "Хлеб" };
-        Epic epic = new Epic(55, subtasks);
-
-        Meeting meeting = new Meeting(
-                555,
-                "Выкатка 3й версии приложения",
-                "Приложение НетоБанка",
-                "Во вторник после обеда"
-        );
-
-        Todos todos = new Todos(); */
+//        SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
+//
+//        String[] subtasks = { "Молоко", "Яйца", "Хлеб" };
+//        Epic epic = new Epic(55, subtasks);
+//
+//        Meeting meeting = new Meeting(
+//                555,
+//                "Выкатка 3й версии приложения",
+//                "Приложение НетоБанка",
+//                "Во вторник после обеда"
+//        );
+//
+//        Todos todos = new Todos();
 
         todos.add(simpleTask);
         todos.add(epic);
@@ -49,7 +49,7 @@ public class TodosTest {
         todos.add(meeting);
 
         Task[] expected = { simpleTask };
-        Task[] actual = todos.search("родителям");
+        Task[] actual = todos.search("Предложить");
         Assertions.assertArrayEquals(expected, actual);
     }
 
@@ -62,6 +62,18 @@ public class TodosTest {
 
         Task[] expected = {};
         Task[] actual = todos.search("Бочка");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFoundAnyTasks() {
+
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+        Task[] expected = {simpleTask, meeting};
+        Task[] actual = todos.search("версии");
         Assertions.assertArrayEquals(expected, actual);
     }
 }
